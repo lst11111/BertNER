@@ -79,18 +79,18 @@ def create_data_loader():
     test_dataset = MyDataset(datafile='data/weiboNER.conll.test', with_labels=True)
 
     train_dataloader = DataLoader(train_dataset, batch_size=5, shuffle=False)
-    dev_dataloader = DataLoader(dev_dataset, batch_size=5, shuffle=False)
-    test_dataloader = DataLoader(test_dataset, batch_size=5, shuffle=False)
-    index_label = train_dataset.index_label
-    return train_dataloader, dev_dataloader, test_dataloader, index_label
+    dev_dataloader = DataLoader(dev_dataset, batch_size=1, shuffle=False)
+    test_dataloader = DataLoader(test_dataset, batch_size=1, shuffle=False)
+    index2label = train_dataset.index_label
+    return train_dataloader, dev_dataloader, test_dataloader, index2label
 
 
 if __name__ == "__main__":
-    trainLoader, devLoader, testLoader,index_label = create_data_loader()
+    trainLoader, devLoader, testLoader,index2label = create_data_loader()
     for batch_text, batch_attention_mask, batch_label in trainLoader:
 
         print("Input IDs:\n", batch_text)
         print("Attention Mask:\n", batch_attention_mask)
         print("Label IDs:\n", batch_label)
-        print("index_label",index_label)
+        print("index_label",index2label)
         break
